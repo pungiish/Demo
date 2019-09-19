@@ -16,7 +16,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './forms/login/login.component';
 import { RegisterComponent } from './forms/register/register.component';
-import { UsersComponent } from './profile/profiles/profiles.component';
+import { UsersComponent } from './profile/profiles.component';
 
 
 
