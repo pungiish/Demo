@@ -1,0 +1,19 @@
+<div *ngIf="this.users">
+	<mat-accordion>
+		<mat-expansion-panel *ngFor="let profile of this.users">
+			<mat-expansion-panel-header>
+				<mat-panel-title>
+					{{profile.firstName}} {{profile.lastName}}
+				</mat-panel-title>
+				<mat-panel-description>
+				</mat-panel-description>
+			</mat-expansion-panel-header>
+			<div class="container">
+				<img class="child" [src]="profile.avatar" width="64" height="64">
+				<p class="child">
+					Contact: {{profile.email}}
+				</p>
+			</div>
+		</mat-expansion-panel>
+	</mat-accordion>
+</div>
