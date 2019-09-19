@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
 
-import { User } from 'src/app/models/User'
-import { DataService } from 'src/app/shared/data.service';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router, NavigationExtras } from '@angular/router';
+
+import { DataService } from 'src/app/shared/data.service';
+
+import {MatSnackBar} from '@angular/material/snack-bar';
 
 @Component({
 	selector: 'app-register',
@@ -17,26 +19,26 @@ export class RegisterComponent implements OnInit {
 		email: new FormControl('', Validators.required),
 		password: new FormControl('', Validators.required),
 	})
-
-	constructor (private data: DataService, private router: Router) { }
-	showModal = false;
-		ngOnInit () {
-		}
+	constructor (private data: DataService, private router: Router, private _snackBar: MatSnackBar) { }
+	ngOnInit () {
+	}
 
 	register () {
-			this.data.create(this.registerForm.value).subscribe(
-				data => {
-					console.log(data)
-					this.registerForm.reset();
-					this.router.navigate(['/users'])
-				},
-				err => {
-					console.log(err);
-					this.showModal = true;
-					setTimeout(() => {
-						this.showModal = false;
-					}, 2000);
-				}
-			);
-		}
+		this.data.create(this.registerForm.value).subscribe(
+			data => {
+				console.log(data)
+				this._snackBar.open('Successful registration, redirecting to login', null, {
+					duration: 500,
+				});
+				setTimeout(() => {
+					this.router.navigate(['/login'])
+				}, 500);
+			},
+			err => {
+				this._snackBar.open('Invalid registration details', null, {
+					duration: 2000,
+				});
+			}
+		);
 	}
+}

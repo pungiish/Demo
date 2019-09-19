@@ -7,6 +7,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material';
 import { MatButtonModule } from '@angular/material/button';
 import {MatExpansionModule} from '@angular/material/expansion';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
 
 
 
@@ -36,6 +37,7 @@ import { UsersComponent } from './profile/profiles/profiles.component';
 		MatInputModule,
 		MatButtonModule,
 		MatExpansionModule,
+		MatSnackBarModule,
 		BrowserAnimationsModule
 	],
 	providers: [],

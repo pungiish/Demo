@@ -1,6 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+
+import { DataService } from 'src/app/shared/data.service';
+
+import {MatSnackBar} from '@angular/material/snack-bar';
 
 
 @Component({
@@ -9,17 +14,28 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 	styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
+	token: string;
 	loginForm = new FormGroup({
 		email: new FormControl('', Validators.required),
 		password: new FormControl('', Validators.required),
 	})
-
-	constructor () { }
+	constructor (private data: DataService, private router: Router, private _snackBar: MatSnackBar) { }
 
 	ngOnInit () {
 	}
 	logIn () {
-		console.log("login");
-
+		this.data.logIn(this.loginForm.value).subscribe(
+			token => {
+				console.log(token)
+				this.data.token = token
+				this.router.navigate(['/users'])
+			},
+			err => {
+				this._snackBar.open('Invalid Login', null, {
+					duration: 2000,
+				});
+				this.loginForm.reset();
+			}
+		)
 	}
 }
