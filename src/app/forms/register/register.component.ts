@@ -5,7 +5,7 @@ import { Router, NavigationExtras } from '@angular/router';
 
 import { DataService } from 'src/app/shared/data.service';
 
-import {MatSnackBar} from '@angular/material/snack-bar';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
 	selector: 'app-register',

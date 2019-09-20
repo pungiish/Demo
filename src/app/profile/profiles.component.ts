@@ -27,8 +27,8 @@ export class UsersComponent implements OnInit {
 			(x => {
 				let user = x.data
 				this.selectedUser = new User(user.first_name, user.last_name, user.email, user.avatar, user.id)
-		}
-		)
+			}
+			)
 	}
 
 }
