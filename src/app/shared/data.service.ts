@@ -10,23 +10,37 @@ import { User } from '../models/User';
 	providedIn: 'root'
 })
 export class DataService {
-	token: string;
-	httpOptions = {
-		headers: new HttpHeaders({
-			'Content-Type': 'application/json',
-		})
-	};
+	token: string[];
+
 	constructor (private http: HttpClient) {
 	}
 
 	create (user: User): Observable<any> {
-		return this.http.post(env.req + '/register', user, this.httpOptions)
+		let headers = new HttpHeaders({
+			'Accept': 'application/json',
+		});
+		return this.http.post(env.req + '/register', user, { headers: headers })
 	}
 	read (): Observable<any> {
-		this.httpOptions.headers.append('token', this.token);
-		return this.http.get<any>(env.req + '/users', this.httpOptions);
+		console.log(this.token);
+		let headers = new HttpHeaders({
+			'Accept': 'application/json',
+			'Authorization': `${this.token}`,
+		});
+		console.log(this.token);
+		return this.http.get<any>(env.req + '/users', { headers: headers });
+	}
+	getUser (user: User): Observable<any> {
+		let headers = new HttpHeaders({
+			'Accept': 'application/json',
+			'Authorization': `${this.token}`,
+		});
+		return this.http.get<any>(env.req + '/users/' + user.id, { headers: headers })
 	}
 	logIn (user: User): Observable<string> {
-		return this.http.post<string>(env.req + '/login', user, this.httpOptions)
+		let headers = new HttpHeaders({
+			'Accept': 'application/json',
+		});
+		return this.http.post<string>(env.req + '/login', user, { headers: headers })
 	}
 }

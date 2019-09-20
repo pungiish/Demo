@@ -26,8 +26,7 @@ export class LoginComponent implements OnInit {
 	logIn () {
 		this.data.logIn(this.loginForm.value).subscribe(
 			token => {
-				console.log(token)
-				this.data.token = token
+				this.data.token = Object.values(token)
 				this.router.navigate(['/users'])
 			},
 			err => {
