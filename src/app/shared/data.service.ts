@@ -22,12 +22,10 @@ export class DataService {
 		return this.http.post(env.req + '/register', user, { headers: headers })
 	}
 	read (): Observable<any> {
-		console.log(this.token);
 		let headers = new HttpHeaders({
 			'Accept': 'application/json',
 			'Authorization': `${this.token}`,
 		});
-		console.log(this.token);
 		return this.http.get<any>(env.req + '/users', { headers: headers });
 	}
 	getUser (user: User): Observable<any> {
@@ -35,6 +33,7 @@ export class DataService {
 			'Accept': 'application/json',
 			'Authorization': `${this.token}`,
 		});
+
 		return this.http.get<any>(env.req + '/users/' + user.id, { headers: headers })
 	}
 	logIn (user: User): Observable<string> {
